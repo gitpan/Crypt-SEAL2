@@ -5,7 +5,7 @@ use warnings;
 require Exporter;
 
 our @EXPORT_OK = qw(new encrypt decrypt reset repos);
-our $VERSION = '1.0.1';
+our $VERSION = '1.0.2';
 our @ISA = qw(Exporter);
 
 require XSLoader;
