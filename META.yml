@@ -1,6 +1,6 @@
 #XXXXXXX This is a prototype!!!  It will change in the future!!! XXXXX#
 name:         Crypt-SEAL2
-version:      1.0.2
+version:      1.0.3
 version_from: SEAL2.pm
 installdirs:  site
 requires:

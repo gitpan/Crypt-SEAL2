@@ -5,7 +5,7 @@ use warnings;
 require Exporter;
 
 our @EXPORT_OK = qw(new encrypt decrypt reset repos);
-our $VERSION = '1.0.2';
+our $VERSION = '1.0.3';
 our @ISA = qw(Exporter);
 
 require XSLoader;
@@ -33,7 +33,7 @@ Crypt::SEAL2 - The SEAL stream cipher, version 2.0
 
 =head1 DESCRIPTION
 
-SEAL2 is the second version of the stream cipher, SEAL2, designed by Don
+SEAL2 is the second version of the stream cipher, SEAL, designed by Don
 Coppersmith and Phillip Rogaway.
 
 This module supports the following functions:
@@ -42,37 +42,39 @@ This module supports the following functions:
 
 =item B<new()>
 
-Creates a pseudorandom string, using a user-supplied key as a B<seed>
-to the pseudorandom generator of SEAL2. A pointer initially points at
-the beginning of the pseudorandom string.
+Creates a pseudorandom string (PRS), using a user-supplied key as a
+B<seed> to the pseudorandom generator of SEAL2. A pointer
+initially points at the beginning of the PRS.
 
 =item B<encrypt($data)>
 
-Encrypts the data stream B<$data> by B<XOR>-ing it with the 
-pseudorandom string, starting at the position being pointed to by the
-string pointer, and returns the resulting ciphertext. The pointer is
-advanced by 1 bit position for every bit of B<$data> that is encrypted.
+Encrypts the data stream B<$data> by B<XOR>-ing it with the PRS,
+starting at the position being pointed to by the PRS pointer, and
+returns the resulting ciphertext. The PRS pointer is advanced 1 byte
+position for every byte of B<$data> that is encrypted.
 
 =item B<decrypt($data)>
 
-Decrypts the data stream B<$data> by B<XOR>-ing it with the 
-pseudorandom string, starting at the position being pointed to by the
-string pointer, and returns the resulting plaintext. The pointer is
-advanced by 1 bit position for every bit of B<$data> that is decrypted.
+Decrypts the data stream B<$data> by B<XOR>-ing it with the PRS,
+starting at the position being pointed to by the PRS pointer, and
+returns the resulting plaintext. The PRS pointer is advanced 1 byte
+position for every byte of B<$data> that is decrypted.
+
+B<decrypt($data)> is exactly the same as B<encrypt($data)>.
 
 
 =item B<reset()>
 
 Every time a call to either B<encrypt()> or B<decrypt()> is performed,
-the pointer to the pseudorandom sequence is advanced. Therefore, it is
-necessary to B<reset()> the pointer in order to encrypt/decrypt the
-data stream correctly. Alternatively, you may use B<repos()> to
-manually re-position the pointer to where the encryption/decryption
-will start (see next function).
+the PRS pointer is advanced. Therefore, it is necessary to B<reset()>
+the pointer in order to encrypt/decrypt the data stream correctly.
+Alternatively, you may use B<repos()> to manually re-position the
+PRS pointer to where the encryption/decryption will start (see next
+function).
 
 =item B<repos($position)>
 
-Re-positions the pseudorandom string pointer at position B<$position>
+Re-positions the PRS pointer at byte position B<$position>
 
 =back
 
