@@ -5,7 +5,7 @@ use warnings;
 require Exporter;
 
 our @EXPORT_OK = qw(new encrypt decrypt reset repos);
-our $VERSION = '1.0.0';
+our $VERSION = '1.0.1';
 our @ISA = qw(Exporter);
 
 require XSLoader;
@@ -19,7 +19,7 @@ __END__
 
 =head1 NAME
 
-Crypt::SEAL2 - A stream cipher
+Crypt::SEAL2 - The SEAL stream cipher, version 2.0
 
 =head1 SYNOPSIS
 
