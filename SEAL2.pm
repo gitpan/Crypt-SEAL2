@@ -4,8 +4,8 @@ use strict;
 use warnings;
 require Exporter;
 
-our @EXPORT_OK = qw(new encrypt decrypt reset repos);
-our $VERSION = '1.0.3';
+our @EXPORT_OK = qw(new encrypt decrypt keysize reset repos);
+our $VERSION = '1.0.4';
 our @ISA = qw(Exporter);
 
 require XSLoader;
@@ -28,6 +28,7 @@ Crypt::SEAL2 - The SEAL stream cipher, version 2.0
     $cipher = new Crypt::SEAL2 $key;
     $ciphertext = $cipher->encrypt($plaintext);
     $cipher->reset();
+    $ks = $cipher->keysize();
     $plaintext  = $cipher->decrypt($ciphertext);
     $cipher->repos($position);
 
@@ -43,7 +44,7 @@ This module supports the following functions:
 =item B<new()>
 
 Creates a pseudorandom string (PRS), using a user-supplied key as a
-B<seed> to the pseudorandom generator of SEAL2. A pointer
+B<seed> to the pseudorandom generator of SEAL2. A PRS pointer
 initially points at the beginning of the PRS.
 
 =item B<encrypt($data)>
@@ -75,6 +76,10 @@ function).
 =item B<repos($position)>
 
 Re-positions the PRS pointer at byte position B<$position>
+
+=item B<keysize()>
+
+Returns the size (in bytes) of the key used (20, in this case)
 
 =back
 

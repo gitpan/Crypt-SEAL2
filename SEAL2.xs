@@ -32,6 +32,13 @@ new(class, rawkey)
     OUTPUT:
         RETVAL
 
+int
+keysize(...)
+    CODE:
+        RETVAL = 20;
+    OUTPUT:
+        RETVAL
+
 void
 reset(self)
     Crypt::SEAL2 self

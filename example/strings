@@ -8,6 +8,9 @@ use Crypt::SEAL2;
 my $key = pack "H40", "00112233445566778899aabbccddeeff00112233";
 my $cipher = new Crypt::SEAL2 $key;
 
+my $ks = $cipher->keysize;
+print "keysize=$ks bytes\n";
+
 my $plaintext1 = pack "H16", "0123456789abcdef";
 print "old plaintext1  : ", unpack("H*", $plaintext1), "\n";
 
@@ -42,7 +45,7 @@ $ciphertext2 = $cipher->encrypt($plaintext2);
 print "ciphertext1 : ", unpack("H*", $ciphertext1), "\n";
 print "ciphertext2 : ", unpack("H*", $ciphertext2), "\n";
 
-print "\nNow, concantenate the two strings and encrypt the result\n";
+print "\nNow, concatenate the two strings and encrypt the result\n";
 $cipher->reset();
 my $plaintext3 = $plaintext1 . $plaintext2;
 print "old plaintext3  : ", unpack("H*", $plaintext3), "\n";
